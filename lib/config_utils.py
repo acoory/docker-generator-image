@@ -7,6 +7,10 @@ GREEN = '\033[92m'
 def get_choice_version():
     """Demande à l'utilisateur de spécifier la version de l'image Docker."""
     image_version = input(f"{BLUE}Veuillez spécifier la version de l'image docker que vous souhaitez créer {BOLD}(exemple: 1.0.0): {RESET}")
+
+    if not image_version.replace('.', '').isnumeric() or len(image_version.split('.')) != 3:
+        print(f"{RED}Format de version invalide. Veuillez spécifier la version sous la forme '1.0.0'.{RESET}")
+        return get_choice_version()
     return image_version
 
 def get_choice_api():

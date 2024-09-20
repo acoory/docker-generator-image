@@ -58,10 +58,20 @@ Le script vous fournira ensuite un récapitulatif de la configuration choisie av
 Le projet contient les dossiers suivants :
 
 ```
-├── generate_docker_image.py    # Script Python principal
-├── Dockerfile-prod             # Dockerfile utilisé pour créer les images Docker
-├── docker-image/               # Répertoires de stockage des images Docker générées
-│   ├── mac-arm64/
-│   ├── ubuntu-amd64/
-└── README.md                   # Ce fichier
+├── Dockerfile-prod
+├── README.md
+├── docker-image
+│   ├── mac-arm64
+│   └── ubuntu-amd64
+├── image-builder.py
+├── index.js
+├── lib
+│   ├── __pycache__
+│   │   ├── config_utils.cpython-312.pyc
+│   │   ├── docker_utils.cpython-312.pyc
+│   │   └── os_utils.cpython-312.pyc
+│   ├── config_utils.py
+│   ├── docker_utils.py
+│   └── os_utils.py
+└── package.json
 ```
