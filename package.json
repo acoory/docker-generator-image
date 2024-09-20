@@ -1,0 +1,15 @@
+{
+  "name": "docker-generator-exemple",
+  "version": "1.0.0",
+  "description": "Ce script Python permet de générer facilement des images Docker pour différentes architectures (macOS, Ubuntu, Windows). Il offre la possibilité de choisir l'architecture cible, de spécifier un numéro de version pour l'image, ainsi que de choisir l'API (client ou BO) à utiliser.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "anthony cory",
+  "license": "ISC"
+}
