@@ -1,8 +1,15 @@
 import subprocess
 import os
+from dotenv import load_dotenv
+
 GREEN = '\033[92m'
 RED = '\033[91m'
 RESET = '\033[0m'
+
+load_dotenv('lib/.env')
+
+path_docker = os.getenv('PATH_DOCKERFILE')
+path_docker = os.path.abspath(path_docker)
 
 def execute_command_for_os(os_choice, image_version, api_choice):
 
@@ -12,7 +19,7 @@ def execute_command_for_os(os_choice, image_version, api_choice):
         format_image_version = image_version.replace('.', '-')
 
 
-        docker_build_command = "docker buildx build --platform " + platform +  " -t " + api_choice + ":" + image_version + " -f ./Dockerfile-prod ./ --load"
+        docker_build_command = "docker buildx build --platform " + platform +  " -t " + api_choice + ":" + image_version + " -f /" + path_docker + " ./ --load"
         docker_save_command = "docker save -o " + api_choice + "-" + format_image_version + ".tar " + api_choice + ":" + image_version
         zip_command = "zip " + api_choice + "-" + format_image_version + ".zip " + api_choice + "-" + format_image_version + ".tar"
 
