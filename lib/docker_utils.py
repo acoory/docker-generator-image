@@ -1,54 +1,8 @@
 import subprocess
 import os
-
 GREEN = '\033[92m'
 RED = '\033[91m'
 RESET = '\033[0m'
-BLUE = '\033[94m'
-BOLD = '\033[1m'
-
-def get_user_os():
-    """Demande à l'utilisateur de spécifier l'OS."""
-    os_choice = input(f"{BLUE}Veuillez spécifier pour quel architecture vous souhaitez créer l'image docker {BOLD}(mac, ubuntu, windows):{RESET} ")
-    
-    if os_choice not in ['mac', 'ubuntu', 'windows']:
-        print(f"{RED}Choix invalide. Veuillez spécifier 'mac', 'ubuntu', ou 'windows'.{RESET}")
-        return get_user_os()  # Redemander en cas de choix invalide
-    return os_choice
-
-def get_choice_version():
-    """Demande à l'utilisateur de spécifier la version de l'image docker qui sera créée."""
-    image_version = input(f"{BLUE}Veuillez spécifier la version de l'image docker que vous souhaitez créer {BOLD}(exemple: 1.0.0): {RESET}")
-    return image_version
-
-def get_choice_api():
-    """Demande à l'utilisateur de spécifier l'API à utiliser."""
-    api_choice = input(f"{BLUE}Veuillez spécifier pour quelle API vous souhaitez créer l'image docker {BOLD}(client, bo):{RESET} ")
-
-    if api_choice not in ['client', 'bo']:
-        print(f"{RED}Choix invalide. Veuillez spécifier 'client' ou 'bo'.{RESET}")
-        return get_choice_api()
-    
-    if api_choice == 'client':
-        api_choice = 'api-nodejs-dp-client'
-    else:
-        api_choice = 'api-nodejs-dp-bo'
-
-    return api_choice
-
-def recap_configuration(os_choice, image_version, api_choice):
-    """Affiche un récapitulatif de la configuration choisie."""
-
-    print(f"{BOLD}{GREEN}Configuration choisie:{RESET}")
-    print(f"{BLUE} => OS: {os_choice}")
-    print(f" => Version de l'image: {image_version}")
-    print(f" => API: {api_choice}{RESET}")
-
-    confirmation = input("Confirmez-vous la configuration choisie? (o/n): ")
-    if confirmation == 'o':
-        return
-    else:
-        return main()
 
 def execute_command_for_os(os_choice, image_version, api_choice):
 
@@ -64,7 +18,7 @@ def execute_command_for_os(os_choice, image_version, api_choice):
 
         try:
             print(f"{GREEN}Création de l'image docker pour macOS version {image_version}...{RESET}")
-            
+
             subprocess.run(docker_build_command, shell=True)
             working_directory = os.getcwd()
             os.chdir(working_directory + "/docker-image/mac-arm64")
@@ -133,17 +87,3 @@ def execute_command_for_os(os_choice, image_version, api_choice):
     elif os_choice == 'windows':
         print("Aucune configuration pour Windows.")
         return 
-    
-def main():
-    
-    os_choice = get_user_os()
-
-    image_version = get_choice_version()
-    api_choice = get_choice_api()
-
-    recap_configuration(os_choice, image_version, api_choice)
-    
-    execute_command_for_os(os_choice, image_version , api_choice)
-
-if __name__ == "__main__":
-    main()
